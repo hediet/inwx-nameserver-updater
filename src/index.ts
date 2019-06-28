@@ -60,15 +60,19 @@ async function getIp2(): Promise<string> {
 
 async function setIp(newIp: string): Promise<void> {
 	inwx(
-		{ api: "production", user: config.username, password: config.password },
+		{
+			api: "production",
+			user: config.username,
+			password: config.password,
+		},
 		function(api: any) {
 			api.nameserverRecordHelper(
 				"hediet.de",
 				"update",
 				{ content: newIp },
-				{ type: "A", name: "" },
+				{ type: "A", name: "hediet.de" },
 				function(response: any) {
-					console.log(`Updated ip to ${newIp}`);
+					console.log(`Updated ip to ${newIp}`, response);
 					api.close();
 				}
 			);
